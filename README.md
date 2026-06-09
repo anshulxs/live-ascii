@@ -2,10 +2,6 @@
 
 A lightweight Python app that converts your webcam feed into live ASCII art in real time.
 
-## Demo
-
-Your camera feed — rendered entirely in characters, updating live in a desktop window.
-
 ## Requirements
 
 - Python 3.8+
@@ -13,14 +9,28 @@ Your camera feed — rendered entirely in characters, updating live in a desktop
 
 ## Installation
 
+**With uv (recommended):**
 ```bash
-git clone https://github.com/your-username/live-ascii.git
+git clone https://github.com/anshulxs/live-ascii.git
+cd live-ascii
+uv sync
+```
+
+**With pip:**
+```bash
+git clone https://github.com/anshulxs/live-ascii.git
 cd live-ascii
 pip install -r requirements.txt
 ```
 
 ## Usage
 
+**With uv:**
+```bash
+uv run main.py
+```
+
+**With pip:**
 ```bash
 python main.py
 ```
