@@ -31,6 +31,7 @@ class Window(tk.Tk):
         self.photo = None
 
         self.resizable(False, False)
+        self.update_idletasks()
 
     def render(self,ascii_str, frame):
         new_photo = ImageTk.PhotoImage(frame)
