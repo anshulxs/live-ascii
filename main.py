@@ -12,7 +12,7 @@ def main():
         frame = cap.get_frame()
         ascii_art = AsciiArt(frame)
         ascii_str = ascii_art.image_to_ascii((window.winfo_width()//2)//window.font_width,
-                                              90,
+                                              80,
                                               font_width=window.font_width,
                                               font_height=window.font_height,
                                               )

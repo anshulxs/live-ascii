@@ -1,6 +1,6 @@
 import numpy as np
 
-ASCII_CHAR = "`.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@"
+ASCII_CHAR = " .:-=+*#%@"
 
 class AsciiArt:
     def __init__(self, image):
@@ -18,24 +18,18 @@ class AsciiArt:
     def img_to_greyscale(self):
         self.image = self.image.convert("L")
     
-    def pixel_to_ascii(self, threshold=50, invert=None):
+    def pixel_to_ascii(self, threshold=50, invert : bool=False):
         pixels = np.array(self.image)
-        ascii = []
-        if invert:
-            for pixel in pixels.flatten():
-                if pixel > threshold:
-                    ascii.append(" ")
-                else:
-                    ascii.append(ASCII_CHAR[::-1][int(pixel * (90/255))])
-            return "".join(ascii)
+        chars = ASCII_CHAR[::-1] if invert else ASCII_CHAR
+        ascii_art = []
         for pixel in pixels.flatten():
             if pixel < threshold:
-                ascii.append(" ")
+                ascii_art.append(" ")
             else:
-                ascii.append(ASCII_CHAR[int(pixel * (90/255))])
-        return "".join(ascii)
+                ascii_art.append(chars[pixel // 32])
+        return "".join(ascii_art)
 
-    def image_to_ascii(self, new_width=100, threshold=50, invert=None, font_width=None, font_height=None):
+    def image_to_ascii(self, new_width=100, threshold=50, invert=False, font_width=None, font_height=None):
         self.resize_image(new_width, font_width, font_height)
         self.img_to_greyscale()
         ascii_str = self.pixel_to_ascii(threshold, invert)
