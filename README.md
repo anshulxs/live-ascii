@@ -1,6 +1,6 @@
 # live-ascii
 
-A lightweight Python app that converts your webcam feed into live ASCII art in real time.
+A lightweight Python app that converts your webcam feed into a live terminal art stream in real time. Two modes: `ascii` (classic ASCII art) and `color` (colored `@` blocks).
 
 ## Requirements
 
@@ -25,17 +25,28 @@ pip install -r requirements.txt
 
 ## Usage
 
+```bash
+python main.py <mode>
+```
+
+Where `<mode>` is one of:
+
+- `ascii` — classic webcam-to-ASCII-art conversion
+- `color` — colored output using the `@` symbol for each pixel (no ASCII conversion)
+
 **With uv:**
 ```bash
-uv run main.py
+uv run main.py ascii
+uv run main.py color
 ```
 
 **With pip:**
 ```bash
-python main.py
+python main.py ascii
+python main.py color
 ```
 
-Press the window's close button to exit cleanly.
+The output streams directly in the terminal you ran the script from. Press `q` to exit cleanly.
 
 ## Dependencies
 
@@ -43,14 +54,13 @@ Press the window's close button to exit cleanly.
 |--------|---------|
 | `opencv-python` | Capturing the webcam feed |
 | `Pillow` | Image processing |
-| `tkinter` | Desktop display window (included with Python) |
+| `rich` | Rendering ASCII/color output to the terminal |
 
 ## How it works
 
-Three classes, each with one job:
+Two classes, each with one job:
 
 - **`VideoCapture`** — opens the camera and reads frames
-- **`AsciiArt`** — converts a frame into an ASCII string
-- **`Window`** — displays the result in a tkinter window
+- **`AsciiArt`** — converts a frame into either ASCII (`ascii` mode) or colored `@` blocks (`color` mode)
 
-`main.py` wires them together in a live loop.
+`main.py` reads the `<mode>` argument and wires everything together in a live loop, using `rich` to print each frame straight to the terminal until `q` is pressed.
