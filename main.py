@@ -1,26 +1,17 @@
-from ascii_art import AsciiArt
-from video_capture import VideoCapture
-from window import Window
+import sys
+from modes.ascii import ascii
+from modes.color import color
 
 def main():
-    cap = VideoCapture(0)
-    frame_width = cap.get_frame_width()
-    frame_height = cap.get_frame_height()
-    window = Window(frame_width, frame_height)
-
-    def loop():
-        frame = cap.get_frame()
-        ascii_art = AsciiArt(frame)
-        ascii_str = ascii_art.image_to_ascii((window.winfo_width()//2)//window.font_width,
-                                              80,
-                                              font_width=window.font_width,
-                                              font_height=window.font_height,
-                                              )
-        window.render(ascii_str, frame)
-        window.after(int(1000//cap.fps), loop)
-
-    window.run(loop)
-    cap.cleanup()
+    if len(sys.argv) < 2:
+        print("Usage: python main.py <mode>")
+        sys.exit(1)
+    elif sys.argv[1] == "ascii":
+        ascii()
+    elif sys.argv[1] == "color":
+        color()
+    else:
+        print("invalid mode.\navailable modes: ascii, color")
 
 if __name__ == '__main__':
     main()
