@@ -1,6 +1,7 @@
 from ascii_art import AsciiArt
 from video_capture import VideoCapture
 from rich.live import Live
+from rich.text import Text
 import keyboard
 
 def ascii():
@@ -11,7 +12,7 @@ def ascii():
         while True:
             frame = cam.get_frame()
             ascii_image = artist.image_to_ascii(frame, new_width=70)
-            live.update(ascii_image)
+            live.update(Text(ascii_image))
 
             if keyboard.is_pressed("q"):
                 break
