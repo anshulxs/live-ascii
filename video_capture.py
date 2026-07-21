@@ -18,7 +18,8 @@ class VideoCapture:
         ret, frame = self.cap.read()
         if not ret:
             raise Exception("failed to capture frame")
-        rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        flipped_frame = cv2.flip(frame, 1)
+        rgb_frame = cv2.cvtColor(flipped_frame, cv2.COLOR_BGR2RGB)
         frame_img = Image.fromarray(rgb_frame)
         return frame_img
 
